@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="ID" />
@@ -266,6 +266,28 @@
           <Property Name="DeletedDate" Type="date" />
           <Property Name="Deleted" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_SuperAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SuperAdminName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_Account_Account1">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Account1" Type="Self.Account" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Account_Agent">
           <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -650,6 +672,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_LoginCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="nvarchar" Mode="In" />
+          <Parameter Name="passWord" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="BankModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
@@ -665,6 +691,17 @@
           <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersRole" EntityType="Self.UsersRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_SuperAdmin" EntityType="Self.View_SuperAdmin" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_SuperAdmin].[ID] AS [ID], 
+    [View_SuperAdmin].[SuperAdminName] AS [SuperAdminName], 
+    [View_SuperAdmin].[Password] AS [Password]
+    FROM [dbo].[View_SuperAdmin] AS [View_SuperAdmin]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Account_Account1" Association="Self.FK_Account_Account1">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Account1" EntitySet="Account" />
+          </AssociationSet>
           <AssociationSet Name="FK_Account_Agent" Association="Self.FK_Account_Agent">
             <End Role="Agent" EntitySet="Agent" />
             <End Role="Account" EntitySet="Account" />
@@ -794,8 +831,7 @@
             <End Role="Admin" EntitySet="Admin" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -825,6 +861,8 @@
           <NavigationProperty Name="Branch" Relationship="Self.FK_Account_Branch" FromRole="Account" ToRole="Branch" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Account_Product" FromRole="Account" ToRole="Product" />
           <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Account" FromRole="Account" ToRole="Transaction_details" />
+          <NavigationProperty Name="Account1" Relationship="BankModel.FK_Account_Account1" FromRole="Account" ToRole="Account1" />
+          <NavigationProperty Name="Account2" Relationship="BankModel.FK_Account_Account1" FromRole="Account1" ToRole="Account" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
@@ -1651,7 +1689,41 @@
             <End Role="UsersRole" EntitySet="UsersRoles" />
             <End Role="UserDetails" EntitySet="UserDetails" />
           </AssociationSet>
+          <EntitySet Name="View_SuperAdmin" EntityType="BankModel.View_SuperAdmin" />
+          <AssociationSet Name="FK_Account_Account1" Association="BankModel.FK_Account_Account1">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Account1" EntitySet="Accounts" />
+          </AssociationSet>
+          <FunctionImport Name="SP_LoginCredentials" ReturnType="Collection(BankModel.SP_LoginCredentials_Result)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <EntityType Name="View_SuperAdmin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SuperAdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Account_Account1">
+          <End Type="BankModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BankModel.Account" Role="Account1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_LoginCredentials_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="SuperAdminName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1933,6 +2005,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="View_SuperAdmin">
+            <EntityTypeMapping TypeName="BankModel.View_SuperAdmin">
+              <MappingFragment StoreEntitySet="View_SuperAdmin">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_LoginCredentials" FunctionName="BankModel.Store.SP_LoginCredentials">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BankModel.SP_LoginCredentials_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

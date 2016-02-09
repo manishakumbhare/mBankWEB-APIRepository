@@ -26,6 +26,8 @@
     <NavigationProperty Name="Branch" Relationship="Self.FK_Account_Branch" FromRole="Account" ToRole="Branch" />
     <NavigationProperty Name="Product" Relationship="Self.FK_Account_Product" FromRole="Account" ToRole="Product" />
     <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Account" FromRole="Account" ToRole="Transaction_details" />
+    <NavigationProperty Name="Account1" Relationship="BankModel.FK_Account_Account1" FromRole="Account" ToRole="Account1" />
+    <NavigationProperty Name="Account2" Relationship="BankModel.FK_Account_Account1" FromRole="Account1" ToRole="Account" />
   </EntityType>
   <EntityType Name="Admin">
     <Key>
@@ -852,5 +854,39 @@
       <End Role="UsersRole" EntitySet="UsersRoles" />
       <End Role="UserDetails" EntitySet="UserDetails" />
     </AssociationSet>
+    <EntitySet Name="View_SuperAdmin" EntityType="BankModel.View_SuperAdmin" />
+    <AssociationSet Name="FK_Account_Account1" Association="BankModel.FK_Account_Account1">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Account1" EntitySet="Accounts" />
+    </AssociationSet>
+    <FunctionImport Name="SP_LoginCredentials" ReturnType="Collection(BankModel.SP_LoginCredentials_Result)">
+      <Parameter Name="userName" Mode="In" Type="String" />
+      <Parameter Name="passWord" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <EntityType Name="View_SuperAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuperAdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Account_Account1">
+    <End Type="BankModel.Account" Role="Account" Multiplicity="1" />
+    <End Type="BankModel.Account" Role="Account1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="SP_LoginCredentials_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="SuperAdminName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+  </ComplexType>
 </Schema>

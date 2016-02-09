@@ -261,6 +261,28 @@
     <Property Name="DeletedDate" Type="date" />
     <Property Name="Deleted" Type="bit" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_SuperAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SuperAdminName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <Association Name="FK_Account_Account1">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="Account1" Type="Self.Account" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Account_Agent">
     <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
     <End Role="Account" Type="Self.Account" Multiplicity="*" />
@@ -645,6 +667,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_LoginCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userName" Type="nvarchar" Mode="In" />
+    <Parameter Name="passWord" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="BankModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
@@ -660,6 +686,17 @@
     <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersRole" EntityType="Self.UsersRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_SuperAdmin" EntityType="Self.View_SuperAdmin" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_SuperAdmin].[ID] AS [ID], 
+    [View_SuperAdmin].[SuperAdminName] AS [SuperAdminName], 
+    [View_SuperAdmin].[Password] AS [Password]
+    FROM [dbo].[View_SuperAdmin] AS [View_SuperAdmin]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Account_Account1" Association="Self.FK_Account_Account1">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="Account1" EntitySet="Account" />
+    </AssociationSet>
     <AssociationSet Name="FK_Account_Agent" Association="Self.FK_Account_Agent">
       <End Role="Agent" EntitySet="Agent" />
       <End Role="Account" EntitySet="Account" />

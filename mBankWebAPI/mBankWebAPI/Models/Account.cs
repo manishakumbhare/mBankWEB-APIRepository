@@ -42,5 +42,7 @@ namespace mBankWebAPI.Models
         public virtual Branch Branch { get; set; }
         public virtual Product Product { get; set; }
         public virtual ICollection<Transaction_details> Transaction_details { get; set; }
+        public virtual Account Account1 { get; set; }
+        public virtual Account Account2 { get; set; }
     }
 }

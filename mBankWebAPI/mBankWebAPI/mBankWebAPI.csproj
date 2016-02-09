@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +40,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,12 +122,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -208,12 +211,14 @@
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManagersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SP_LoginCredentialsController.cs" />
     <Compile Include="Controllers\SuperAdminsController.cs" />
     <Compile Include="Controllers\TransactionStatusController.cs" />
     <Compile Include="Controllers\Transaction_detailsController.cs" />
     <Compile Include="Controllers\UserDetailsController.cs" />
     <Compile Include="Controllers\UsersRolesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\View_SuperAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -262,6 +267,9 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_LoginCredentials_Result.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SuperAdmin.cs">
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
@@ -275,6 +283,9 @@
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersRole.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_SuperAdmin.cs">
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

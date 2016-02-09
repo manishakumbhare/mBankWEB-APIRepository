@@ -51,6 +51,8 @@
         <AssociationConnector Association="BankModel.FK_Transaction_details_Manager" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK_Transaction_details_Product" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK_UserDetails_UserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BankModel.View_SuperAdmin" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="BankModel.FK_Account_Account1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

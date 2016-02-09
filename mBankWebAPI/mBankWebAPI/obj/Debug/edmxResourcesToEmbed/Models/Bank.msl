@@ -276,5 +276,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="View_SuperAdmin">
+      <EntityTypeMapping TypeName="BankModel.View_SuperAdmin">
+        <MappingFragment StoreEntitySet="View_SuperAdmin">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_LoginCredentials" FunctionName="BankModel.Store.SP_LoginCredentials">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.SP_LoginCredentials_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

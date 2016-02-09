@@ -12,6 +12,8 @@ namespace mBankWebAPI.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BankEntities : DbContext
     {
@@ -39,5 +41,19 @@ namespace mBankWebAPI.Models
         public virtual DbSet<TransactionStatu> TransactionStatus { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UsersRole> UsersRoles { get; set; }
+        public virtual DbSet<View_SuperAdmin> View_SuperAdmin { get; set; }
+    
+        public virtual ObjectResult<SP_LoginCredentials_Result> SP_LoginCredentials(string userName, string passWord)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
+    
+            var passWordParameter = passWord != null ?
+                new ObjectParameter("passWord", passWord) :
+                new ObjectParameter("passWord", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_LoginCredentials_Result>("SP_LoginCredentials", userNameParameter, passWordParameter);
+        }
     }
 }
