@@ -1,0 +1,856 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExternalAccountId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="Balance" Type="Double" />
+    <Property Name="IsSyncronise" Type="Boolean" />
+    <Property Name="BankSyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="SyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="IstallmentDays" Type="Int32" />
+    <Property Name="Percentage" Type="Double" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Agent" Relationship="Self.FK_Account_Agent" FromRole="Account" ToRole="Agent" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Account_Bank" FromRole="Account" ToRole="Bank" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Account_Branch" FromRole="Account" ToRole="Branch" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Account_Product" FromRole="Account" ToRole="Product" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Account" FromRole="Account" ToRole="Transaction_details" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_Admin" FromRole="Admin" ToRole="Bank" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Admin" FromRole="Admin" ToRole="Manager" />
+    <NavigationProperty Name="UsersRole" Relationship="Self.FK_UserRole_Admin" FromRole="Admin" ToRole="UsersRole" />
+  </EntityType>
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="ManagerId" Type="Int32" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSyncronise" Type="Boolean" />
+    <Property Name="SincronisationDate" Type="DateTime" Precision="0" />
+    <Property Name="BankSyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="Createddate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Agent" FromRole="Agent" ToRole="Account" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Agent_Branch" FromRole="Agent" ToRole="Branch" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK_Agent_Manager" FromRole="Agent" ToRole="Manager" />
+    <NavigationProperty Name="UsersRole" Relationship="Self.FK_Agent_UsersRoll" FromRole="Agent" ToRole="UsersRole" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Bank_Agent" FromRole="Agent" ToRole="Bank" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Agent" FromRole="Agent" ToRole="Customers" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Agent" FromRole="Agent" ToRole="Transaction_details" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="SuperAdminId" Type="Int32" />
+    <Property Name="AdminId" Type="Int32" />
+    <Property Name="BankShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="RegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WorkingHours" Type="Time" Precision="7" />
+    <Property Name="BankLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BankDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="LanguageId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Bank" FromRole="Bank" ToRole="Account" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Bank_Admin" FromRole="Bank" ToRole="Admin" />
+    <NavigationProperty Name="Agents" Relationship="Self.FK_Bank_Agent" FromRole="Bank" ToRole="Agent" />
+    <NavigationProperty Name="Language" Relationship="Self.FK_Bank_Language" FromRole="Bank" ToRole="Language" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Bank_Product" FromRole="Bank" ToRole="Product" />
+    <NavigationProperty Name="SuperAdmin" Relationship="Self.FK_Bank_SuperAdmin" FromRole="Bank" ToRole="SuperAdmin" />
+    <NavigationProperty Name="Branches" Relationship="Self.FK_Branch_Bank" FromRole="Bank" ToRole="Branch" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Bank" FromRole="Bank" ToRole="Customers" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Bank" FromRole="Bank" ToRole="Manager" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Bank" FromRole="Bank" ToRole="Transaction_details" />
+    <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_Bank" FromRole="Bank" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IFSCCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="LanguageId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Branch" FromRole="Branch" ToRole="Account" />
+    <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_Branch" FromRole="Branch" ToRole="Agent" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Branch_Bank" FromRole="Branch" ToRole="Bank" />
+    <NavigationProperty Name="Language" Relationship="Self.FK_Branch_Language" FromRole="Branch" ToRole="Language" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Branch" FromRole="Branch" ToRole="Manager" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Branch" FromRole="Branch" ToRole="Product" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Branch" FromRole="Branch" ToRole="Transaction_details" />
+    <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_Branch" FromRole="Branch" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExternalCustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="CustomerPhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="PancardNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsSyncronise" Type="Boolean" />
+    <Property Name="BankSyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="SyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Agent" Relationship="Self.FK_Customers_Agent" FromRole="Customers" ToRole="Agent" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Customers_Bank" FromRole="Customers" ToRole="Bank" />
+    <NavigationProperty Name="UsersRole" Relationship="Self.FK_Customers_UsersRoll" FromRole="Customers" ToRole="UsersRole" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Customers" FromRole="Customers" ToRole="Transaction_details" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_Language" FromRole="Language" ToRole="Bank" />
+    <NavigationProperty Name="Branches" Relationship="Self.FK_Branch_Language" FromRole="Language" ToRole="Branch" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuperAdminId" Type="Int32" />
+    <Property Name="AdminId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="ManagerName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+    <Property Name="ProfilePhoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Manager_Admin" FromRole="Manager" ToRole="Admin" />
+    <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_Manager" FromRole="Manager" ToRole="Agent" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Manager_Bank" FromRole="Manager" ToRole="Bank" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Manager_Branch" FromRole="Manager" ToRole="Branch" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Manager" FromRole="Manager" ToRole="Transaction_details" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProductDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Product" FromRole="Product" ToRole="Account" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Bank_Product" FromRole="Product" ToRole="Bank" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Product_Branch" FromRole="Product" ToRole="Branch" />
+    <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Product" FromRole="Product" ToRole="Transaction_details" />
+  </EntityType>
+  <EntityType Name="SuperAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuperAdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_SuperAdmin" FromRole="SuperAdmin" ToRole="Bank" />
+  </EntityType>
+  <EntityType Name="Transaction_details">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExternalTransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="ManagerId" Type="Int32" />
+    <Property Name="AgentId" Type="Int32" />
+    <Property Name="CustomerId" Type="Int32" />
+    <Property Name="AccountId" Type="Int32" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="InterestAmount" Type="Double" />
+    <Property Name="BalanceAmount" Type="Double" />
+    <Property Name="TransactionDate" Type="DateTime" Precision="0" />
+    <Property Name="ProducttypeId" Type="Int32" />
+    <Property Name="deleted" Type="Boolean" />
+    <Property Name="NumberofDays" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="IsSyncronise" Type="Boolean" />
+    <Property Name="BankSyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="SyncroniseDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Account" Relationship="Self.FK_Transaction_details_Account" FromRole="Transaction_details" ToRole="Account" />
+    <NavigationProperty Name="Agent" Relationship="Self.FK_Transaction_details_Agent" FromRole="Transaction_details" ToRole="Agent" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_Transaction_details_Bank" FromRole="Transaction_details" ToRole="Bank" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_Transaction_details_Branch" FromRole="Transaction_details" ToRole="Branch" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_Transaction_details_Customers" FromRole="Transaction_details" ToRole="Customers" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK_Transaction_details_Manager" FromRole="Transaction_details" ToRole="Manager" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Transaction_details_Product" FromRole="Transaction_details" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="TransactionStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TransactionStatus" Type="Int32" />
+    <Property Name="Details" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsSyncronise" Type="Boolean" />
+    <Property Name="SyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="BankSyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Bank" Relationship="Self.FK_UserDetails_Bank" FromRole="UserDetails" ToRole="Bank" />
+    <NavigationProperty Name="Branch" Relationship="Self.FK_UserDetails_Branch" FromRole="UserDetails" ToRole="Branch" />
+    <NavigationProperty Name="UsersRole" Relationship="Self.FK_UserDetails_UserRoles" FromRole="UserDetails" ToRole="UsersRole" />
+  </EntityType>
+  <EntityType Name="UsersRole">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RollName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsSyncronise" Type="Boolean" />
+    <Property Name="SyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="BanksyncroniseDate" Type="DateTime" Precision="0" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK_UserRole_Admin" FromRole="UsersRole" ToRole="Admin" />
+    <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_UsersRoll" FromRole="UsersRole" ToRole="Agent" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_UsersRoll" FromRole="UsersRole" ToRole="Customers" />
+    <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserRoles" FromRole="UsersRole" ToRole="UserDetails" />
+  </EntityType>
+  <Association Name="FK_Account_Agent">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Account_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="AccountId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bank">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="AdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_Admin">
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_Manager">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="ManagerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agent_UsersRoll">
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_Agent">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Agent">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_Agent">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Agent">
+    <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agent">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_Language">
+    <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+    <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bank">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_Product">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bank_SuperAdmin">
+    <End Role="SuperAdmin" Type="Self.SuperAdmin" Multiplicity="0..1" />
+    <End Role="Bank" Type="Self.Bank" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SuperAdmin">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bank">
+        <PropertyRef Name="SuperAdminId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserDetails">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Branch_Language">
+    <End Role="Language" Type="Self.Language" Multiplicity="0..1" />
+    <End Role="Branch" Type="Self.Branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Branch">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_Branch">
+    <End Role="Branch" Type="Self.Branch" Multiplicity="0..1" />
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Branch">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserDetails">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customers_UsersRoll">
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="0..1" />
+    <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Customers">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Customers">
+    <End Role="Customers" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Manager">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="ManagerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_details_Product">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Transaction_details" Type="Self.Transaction_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction_details">
+        <PropertyRef Name="ProducttypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDetails_UserRoles">
+    <End Role="UsersRole" Type="Self.UsersRole" Multiplicity="0..1" />
+    <End Role="UserDetails" Type="Self.UserDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersRole">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserDetails">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accounts" EntityType="Self.Account" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Agents" EntityType="Self.Agent" />
+    <EntitySet Name="Banks" EntityType="Self.Bank" />
+    <EntitySet Name="Branches" EntityType="Self.Branch" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Languages" EntityType="Self.Language" />
+    <EntitySet Name="Managers" EntityType="Self.Manager" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="SuperAdmins" EntityType="Self.SuperAdmin" />
+    <EntitySet Name="Transaction_details" EntityType="Self.Transaction_details" />
+    <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatu" />
+    <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+    <EntitySet Name="UsersRoles" EntityType="Self.UsersRole" />
+    <AssociationSet Name="FK_Account_Agent" Association="Self.FK_Account_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_Bank" Association="Self.FK_Account_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_Branch" Association="Self.FK_Account_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Account_Product" Association="Self.FK_Account_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Account" Association="Self.FK_Transaction_details_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_Admin" Association="Self.FK_Bank_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Bank" EntitySet="Banks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Admin" Association="Self.FK_Manager_Admin">
+      <End Role="Admin" EntitySet="Admins" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_Admin" Association="Self.FK_UserRole_Admin">
+      <End Role="UsersRole" EntitySet="UsersRoles" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_Branch" Association="Self.FK_Agent_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_Manager" Association="Self.FK_Agent_Manager">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agent_UsersRoll" Association="Self.FK_Agent_UsersRoll">
+      <End Role="UsersRole" EntitySet="UsersRoles" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_Agent" Association="Self.FK_Bank_Agent">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Agent" EntitySet="Agents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_Agent" Association="Self.FK_Customers_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Agent" Association="Self.FK_Transaction_details_Agent">
+      <End Role="Agent" EntitySet="Agents" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_Language" Association="Self.FK_Bank_Language">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Bank" EntitySet="Banks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_Product" Association="Self.FK_Bank_Product">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bank_SuperAdmin" Association="Self.FK_Bank_SuperAdmin">
+      <End Role="SuperAdmin" EntitySet="SuperAdmins" />
+      <End Role="Bank" EntitySet="Banks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Bank" Association="Self.FK_Branch_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Branch" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_Bank" Association="Self.FK_Customers_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Bank" Association="Self.FK_Manager_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Bank" Association="Self.FK_Transaction_details_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_Bank" Association="Self.FK_UserDetails_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="UserDetails" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Branch_Language" Association="Self.FK_Branch_Language">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Branch" EntitySet="Branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Branch" Association="Self.FK_Manager_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Branch" Association="Self.FK_Product_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Branch" Association="Self.FK_Transaction_details_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_Branch" Association="Self.FK_UserDetails_Branch">
+      <End Role="Branch" EntitySet="Branches" />
+      <End Role="UserDetails" EntitySet="UserDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customers_UsersRoll" Association="Self.FK_Customers_UsersRoll">
+      <End Role="UsersRole" EntitySet="UsersRoles" />
+      <End Role="Customers" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Customers" Association="Self.FK_Transaction_details_Customers">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Manager" Association="Self.FK_Transaction_details_Manager">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_details_Product" Association="Self.FK_Transaction_details_Product">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Transaction_details" EntitySet="Transaction_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDetails_UserRoles" Association="Self.FK_UserDetails_UserRoles">
+      <End Role="UsersRole" EntitySet="UsersRoles" />
+      <End Role="UserDetails" EntitySet="UserDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

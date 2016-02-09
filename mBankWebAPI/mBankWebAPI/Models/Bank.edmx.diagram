@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b38aa1cc483749a499e99a019de604d9" Name="Diagram1">
+        <EntityTypeShape EntityType="BankModel.Account" Width="1.5" PointX="7.5" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Admin" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Agent" Width="1.5" PointX="10.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Bank" Width="1.5" PointX="5.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Branch" Width="1.5" PointX="13.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Customer" Width="1.5" PointX="15.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Language" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Manager" Width="1.5" PointX="20.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Product" Width="1.5" PointX="15.75" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.SuperAdmin" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.Transaction_details" Width="1.5" PointX="18" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.TransactionStatu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.UserDetail" Width="1.5" PointX="15.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.UsersRole" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <AssociationConnector Association="BankModel.FK_Account_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Account_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Account_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Account_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Bank_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Manager_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_UserRole_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Agent_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Agent_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Agent_UsersRoll" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Bank_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Customers_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Bank_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Bank_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Bank_SuperAdmin" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Branch_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Customers_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Manager_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_UserDetails_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Branch_Language" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Manager_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Product_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_UserDetails_Branch" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Customers_UsersRoll" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_Transaction_details_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="BankModel.FK_UserDetails_UserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
