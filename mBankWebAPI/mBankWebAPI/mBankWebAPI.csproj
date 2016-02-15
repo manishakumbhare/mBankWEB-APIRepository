@@ -211,6 +211,7 @@
     <Compile Include="Controllers\LanguagesController.cs" />
     <Compile Include="Controllers\ManagersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\SP_getSuperAdminDetailController.cs" />
     <Compile Include="Controllers\SP_LoginCredentialsController.cs" />
     <Compile Include="Controllers\SuperAdminsController.cs" />
     <Compile Include="Controllers\TransactionStatusController.cs" />
@@ -218,6 +219,11 @@
     <Compile Include="Controllers\UserDetailsController.cs" />
     <Compile Include="Controllers\UsersRolesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\View_AdminController.cs" />
+    <Compile Include="Controllers\View_BankController.cs" />
+    <Compile Include="Controllers\View_BranchController.cs" />
+    <Compile Include="Controllers\View_LanguageController.cs" />
+    <Compile Include="Controllers\View_ProductController.cs" />
     <Compile Include="Controllers\View_SuperAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -267,6 +273,9 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_getSuperAdminDetail_Result.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_LoginCredentials_Result.cs">
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
@@ -283,6 +292,21 @@
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersRole.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Admin.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Bank.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Branch.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Language.cs">
+      <DependentUpon>Bank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Product.cs">
       <DependentUpon>Bank.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\View_SuperAdmin.cs">

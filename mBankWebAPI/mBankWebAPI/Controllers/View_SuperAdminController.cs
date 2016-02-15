@@ -23,6 +23,9 @@ namespace mBankWebAPI.Controllers
             return db.View_SuperAdmin;
         }
 
+
+
+
         // GET: api/View_SuperAdmin/5
         [ResponseType(typeof(View_SuperAdmin))]
         public async Task<IHttpActionResult> GetView_SuperAdmin(int id)

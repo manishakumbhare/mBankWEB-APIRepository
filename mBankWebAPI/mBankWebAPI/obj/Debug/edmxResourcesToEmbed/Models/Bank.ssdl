@@ -28,6 +28,7 @@
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="AdminName" Type="varchar" MaxLength="50" />
+    <Property Name="BankId" Type="int" />
     <Property Name="RoleId" Type="int" />
     <Property Name="Designation" Type="nvarchar" MaxLength="50" />
     <Property Name="Address1" Type="nvarchar" MaxLength="250" />
@@ -35,6 +36,7 @@
     <Property Name="ContactNo1" Type="nvarchar" MaxLength="50" />
     <Property Name="ContactNo2" Type="nvarchar" MaxLength="50" />
     <Property Name="EmailId" Type="nvarchar" MaxLength="250" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="250" />
     <Property Name="ConfirmPassword" Type="nvarchar" MaxLength="250" />
     <Property Name="CreatedDate" Type="date" />
@@ -262,6 +264,109 @@
     <Property Name="Deleted" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_Admin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminName" Type="varchar" MaxLength="50" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="250" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="250" />
+    <Property Name="ContactNo1" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactNo2" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailId" Type="nvarchar" MaxLength="250" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="250" />
+    <Property Name="ConfirmPassword" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedDate" Type="date" />
+    <Property Name="DeletedDate" Type="date" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_Bank' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankName" Type="nvarchar" MaxLength="250" />
+    <Property Name="SuperAdminId" Type="int" />
+    <Property Name="AdminId" Type="int" />
+    <Property Name="BankShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankAddress" Type="nvarchar" MaxLength="250" />
+    <Property Name="RegistrationNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactNo1" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactNo2" Type="nvarchar" MaxLength="50" />
+    <Property Name="WorkingHours" Type="time" Precision="7" />
+    <Property Name="BankLogo" Type="nvarchar(max)" />
+    <Property Name="Website" Type="nvarchar" MaxLength="250" />
+    <Property Name="BankDocument" Type="nvarchar(max)" />
+    <Property Name="PinCode" Type="int" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="LanguageId" Type="int" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedDate" Type="date" />
+    <Property Name="DeletedDate" Type="date" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_Branch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Branch">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="250" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="250" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="250" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="250" />
+    <Property Name="PinCode" Type="int" />
+    <Property Name="Website" Type="nvarchar" MaxLength="250" />
+    <Property Name="IFSCCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductId" Type="int" />
+    <Property Name="LanguageId" Type="int" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="UpdatedDate" Type="date" />
+    <Property Name="DeletedDate" Type="date" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_Language' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Language">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LanguageName" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="DeletedDate" Type="date" />
+    <Property Name="UpdatedDate" Type="date" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Bank.dbo.View_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="250" />
+    <Property Name="ProductDetails" Type="nvarchar" MaxLength="250" />
+    <Property Name="ShortName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankId" Type="int" />
+    <Property Name="BranchId" Type="int" />
+    <Property Name="CreatedDate" Type="date" />
+    <Property Name="DeletedDate" Type="date" />
+    <Property Name="UpdatedDate" Type="date" />
+    <Property Name="Deleted" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_SuperAdmin">
     <Key>
@@ -328,6 +433,18 @@ warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary 
       </Principal>
       <Dependent Role="Account">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_Bank">
+    <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+    <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="BankId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -667,6 +784,9 @@ warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary 
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_getSuperAdminDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="SP_LoginCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="userName" Type="nvarchar" Mode="In" />
     <Parameter Name="passWord" Type="nvarchar" Mode="In" />
@@ -686,6 +806,94 @@ warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary 
     <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersRole" EntityType="Self.UsersRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_Admin" EntityType="Self.View_Admin" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Admin].[ID] AS [ID], 
+    [View_Admin].[AdminName] AS [AdminName], 
+    [View_Admin].[BankId] AS [BankId], 
+    [View_Admin].[RoleId] AS [RoleId], 
+    [View_Admin].[Designation] AS [Designation], 
+    [View_Admin].[Address1] AS [Address1], 
+    [View_Admin].[Address2] AS [Address2], 
+    [View_Admin].[ContactNo1] AS [ContactNo1], 
+    [View_Admin].[ContactNo2] AS [ContactNo2], 
+    [View_Admin].[EmailId] AS [EmailId], 
+    [View_Admin].[Username] AS [Username], 
+    [View_Admin].[Password] AS [Password], 
+    [View_Admin].[ConfirmPassword] AS [ConfirmPassword], 
+    [View_Admin].[CreatedDate] AS [CreatedDate], 
+    [View_Admin].[UpdatedDate] AS [UpdatedDate], 
+    [View_Admin].[DeletedDate] AS [DeletedDate], 
+    [View_Admin].[Deleted] AS [Deleted]
+    FROM [dbo].[View_Admin] AS [View_Admin]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Bank" EntityType="Self.View_Bank" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Bank].[ID] AS [ID], 
+    [View_Bank].[BankName] AS [BankName], 
+    [View_Bank].[SuperAdminId] AS [SuperAdminId], 
+    [View_Bank].[AdminId] AS [AdminId], 
+    [View_Bank].[BankShortName] AS [BankShortName], 
+    [View_Bank].[BankAddress] AS [BankAddress], 
+    [View_Bank].[RegistrationNo] AS [RegistrationNo], 
+    [View_Bank].[ContactNo1] AS [ContactNo1], 
+    [View_Bank].[ContactNo2] AS [ContactNo2], 
+    [View_Bank].[WorkingHours] AS [WorkingHours], 
+    [View_Bank].[BankLogo] AS [BankLogo], 
+    [View_Bank].[Website] AS [Website], 
+    [View_Bank].[BankDocument] AS [BankDocument], 
+    [View_Bank].[PinCode] AS [PinCode], 
+    [View_Bank].[ProductId] AS [ProductId], 
+    [View_Bank].[LanguageId] AS [LanguageId], 
+    [View_Bank].[CreatedDate] AS [CreatedDate], 
+    [View_Bank].[UpdatedDate] AS [UpdatedDate], 
+    [View_Bank].[DeletedDate] AS [DeletedDate], 
+    [View_Bank].[Deleted] AS [Deleted]
+    FROM [dbo].[View_Bank] AS [View_Bank]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Branch" EntityType="Self.View_Branch" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Branch].[ID] AS [ID], 
+    [View_Branch].[BankId] AS [BankId], 
+    [View_Branch].[BranchName] AS [BranchName], 
+    [View_Branch].[BranchCode] AS [BranchCode], 
+    [View_Branch].[Address1] AS [Address1], 
+    [View_Branch].[Address2] AS [Address2], 
+    [View_Branch].[PinCode] AS [PinCode], 
+    [View_Branch].[Website] AS [Website], 
+    [View_Branch].[IFSCCode] AS [IFSCCode], 
+    [View_Branch].[ProductId] AS [ProductId], 
+    [View_Branch].[LanguageId] AS [LanguageId], 
+    [View_Branch].[CreatedDate] AS [CreatedDate], 
+    [View_Branch].[UpdatedDate] AS [UpdatedDate], 
+    [View_Branch].[DeletedDate] AS [DeletedDate], 
+    [View_Branch].[Deleted] AS [Deleted]
+    FROM [dbo].[View_Branch] AS [View_Branch]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Language" EntityType="Self.View_Language" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Language].[ID] AS [ID], 
+    [View_Language].[LanguageName] AS [LanguageName], 
+    [View_Language].[CreatedDate] AS [CreatedDate], 
+    [View_Language].[DeletedDate] AS [DeletedDate], 
+    [View_Language].[UpdatedDate] AS [UpdatedDate], 
+    [View_Language].[Deleted] AS [Deleted]
+    FROM [dbo].[View_Language] AS [View_Language]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Product" EntityType="Self.View_Product" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Product].[ID] AS [ID], 
+    [View_Product].[ProductName] AS [ProductName], 
+    [View_Product].[ProductDetails] AS [ProductDetails], 
+    [View_Product].[ShortName] AS [ShortName], 
+    [View_Product].[BankId] AS [BankId], 
+    [View_Product].[BranchId] AS [BranchId], 
+    [View_Product].[CreatedDate] AS [CreatedDate], 
+    [View_Product].[DeletedDate] AS [DeletedDate], 
+    [View_Product].[UpdatedDate] AS [UpdatedDate], 
+    [View_Product].[Deleted] AS [Deleted]
+    FROM [dbo].[View_Product] AS [View_Product]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="View_SuperAdmin" EntityType="Self.View_SuperAdmin" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [View_SuperAdmin].[ID] AS [ID], 
@@ -712,6 +920,10 @@ warning 6002: The table/view 'Bank.dbo.View_SuperAdmin' does not have a primary 
     <AssociationSet Name="FK_Account_Product" Association="Self.FK_Account_Product">
       <End Role="Product" EntitySet="Product" />
       <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_Bank" Association="Self.FK_Admin_Bank">
+      <End Role="Bank" EntitySet="Bank" />
+      <End Role="Admin" EntitySet="Admin" />
     </AssociationSet>
     <AssociationSet Name="FK_Agent_Branch" Association="Self.FK_Agent_Branch">
       <End Role="Branch" EntitySet="Branch" />

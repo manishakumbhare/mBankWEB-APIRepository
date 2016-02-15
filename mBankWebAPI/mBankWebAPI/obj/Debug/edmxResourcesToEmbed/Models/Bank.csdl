@@ -51,6 +51,9 @@
     <NavigationProperty Name="Banks" Relationship="Self.FK_Bank_Admin" FromRole="Admin" ToRole="Bank" />
     <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Admin" FromRole="Admin" ToRole="Manager" />
     <NavigationProperty Name="UsersRole" Relationship="Self.FK_UserRole_Admin" FromRole="Admin" ToRole="UsersRole" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Bank" Relationship="BankModel.FK_Admin_Bank" FromRole="Admin" ToRole="Bank" />
   </EntityType>
   <EntityType Name="Agent">
     <Key>
@@ -117,6 +120,7 @@
     <NavigationProperty Name="Managers" Relationship="Self.FK_Manager_Bank" FromRole="Bank" ToRole="Manager" />
     <NavigationProperty Name="Transaction_details" Relationship="Self.FK_Transaction_details_Bank" FromRole="Bank" ToRole="Transaction_details" />
     <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_Bank" FromRole="Bank" ToRole="UserDetails" />
+    <NavigationProperty Name="Admins" Relationship="BankModel.FK_Admin_Bank" FromRole="Bank" ToRole="Admin" />
   </EntityType>
   <EntityType Name="Branch">
     <Key>
@@ -128,6 +132,7 @@
     <Property Name="BranchCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PinCode" Type="Int32" />
     <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="IFSCCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -326,6 +331,87 @@
     <NavigationProperty Name="Agents" Relationship="Self.FK_Agent_UsersRoll" FromRole="UsersRole" ToRole="Agent" />
     <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_UsersRoll" FromRole="UsersRole" ToRole="Customers" />
     <NavigationProperty Name="UserDetails" Relationship="Self.FK_UserDetails_UserRoles" FromRole="UsersRole" ToRole="UserDetails" />
+  </EntityType>
+  <EntityType Name="View_Admin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EmailId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="View_Bank">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="SuperAdminId" Type="Int32" />
+    <Property Name="AdminId" Type="Int32" />
+    <Property Name="BankShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="RegistrationNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="WorkingHours" Type="Time" Precision="7" />
+    <Property Name="BankLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BankDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="LanguageId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="View_Language">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="View_Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ProductDetails" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="ShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="View_SuperAdmin">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuperAdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Account_Agent">
     <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
@@ -726,6 +812,11 @@
     <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatu" />
     <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
     <EntitySet Name="UsersRoles" EntityType="Self.UsersRole" />
+    <EntitySet Name="View_Admin" EntityType="Self.View_Admin" />
+    <EntitySet Name="View_Bank" EntityType="Self.View_Bank" />
+    <EntitySet Name="View_Language" EntityType="Self.View_Language" />
+    <EntitySet Name="View_Product" EntityType="Self.View_Product" />
+    <EntitySet Name="View_SuperAdmin" EntityType="Self.View_SuperAdmin" />
     <AssociationSet Name="FK_Account_Agent" Association="Self.FK_Account_Agent">
       <End Role="Agent" EntitySet="Agents" />
       <End Role="Account" EntitySet="Accounts" />
@@ -854,23 +945,52 @@
       <End Role="UsersRole" EntitySet="UsersRoles" />
       <End Role="UserDetails" EntitySet="UserDetails" />
     </AssociationSet>
-    <EntitySet Name="View_SuperAdmin" EntityType="BankModel.View_SuperAdmin" />
-    <AssociationSet Name="FK_Account_Account1" Association="BankModel.FK_Account_Account1">
-      <End Role="Account" EntitySet="Accounts" />
-      <End Role="Account1" EntitySet="Accounts" />
-    </AssociationSet>
+    <FunctionImport Name="SP_getSuperAdminDetail" ReturnType="Collection(BankModel.SP_getSuperAdminDetail_Result)">
+      <Parameter Name="username" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="SP_LoginCredentials" ReturnType="Collection(BankModel.SP_LoginCredentials_Result)">
       <Parameter Name="userName" Mode="In" Type="String" />
       <Parameter Name="passWord" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="View_Branch" EntityType="BankModel.View_Branch" />
+    <AssociationSet Name="FK_Account_Account1" Association="BankModel.FK_Account_Account1">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="Account1" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_Bank" Association="BankModel.FK_Admin_Bank">
+      <End Role="Bank" EntitySet="Banks" />
+      <End Role="Admin" EntitySet="Admins" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="View_SuperAdmin">
+  <ComplexType Name="SP_getSuperAdminDetail_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="SuperAdminName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <ComplexType Name="SP_LoginCredentials_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="SuperAdminName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
+  </ComplexType>
+  <EntityType Name="View_Branch">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SuperAdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BankId" Type="Int32" />
+    <Property Name="BranchName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="PinCode" Type="Int32" />
+    <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IFSCCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="Int32" />
+    <Property Name="LanguageId" Type="Int32" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
+    <Property Name="DeletedDate" Type="DateTime" Precision="0" />
+    <Property Name="Deleted" Type="Boolean" />
   </EntityType>
   <Association Name="FK_Account_Account1">
     <End Type="BankModel.Account" Role="Account" Multiplicity="1" />
@@ -884,9 +1004,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="SP_LoginCredentials_Result">
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="SuperAdminName" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Password" Nullable="true" MaxLength="250" />
-  </ComplexType>
+  <Association Name="FK_Admin_Bank">
+    <End Type="BankModel.Bank" Role="Bank" Multiplicity="0..1" />
+    <End Type="BankModel.Admin" Role="Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bank">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="BankId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

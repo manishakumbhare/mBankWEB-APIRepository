@@ -41,7 +41,21 @@ namespace mBankWebAPI.Models
         public virtual DbSet<TransactionStatu> TransactionStatus { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UsersRole> UsersRoles { get; set; }
+        public virtual DbSet<View_Admin> View_Admin { get; set; }
+        public virtual DbSet<View_Bank> View_Bank { get; set; }
+        public virtual DbSet<View_Language> View_Language { get; set; }
+        public virtual DbSet<View_Product> View_Product { get; set; }
         public virtual DbSet<View_SuperAdmin> View_SuperAdmin { get; set; }
+        public virtual DbSet<View_Branch> View_Branch { get; set; }
+    
+        public virtual ObjectResult<SP_getSuperAdminDetail_Result> SP_getSuperAdminDetail(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_getSuperAdminDetail_Result>("SP_getSuperAdminDetail", usernameParameter);
+        }
     
         public virtual ObjectResult<SP_LoginCredentials_Result> SP_LoginCredentials(string userName, string passWord)
         {

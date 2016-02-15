@@ -27,6 +27,8 @@
     <EntitySetMapping Name="Admins">
       <EntityTypeMapping TypeName="BankModel.Admin">
         <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="AdminName" ColumnName="AdminName" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -276,15 +278,101 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="View_SuperAdmin">
-      <EntityTypeMapping TypeName="BankModel.View_SuperAdmin">
-        <MappingFragment StoreEntitySet="View_SuperAdmin">
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+    <EntitySetMapping Name="View_Admin">
+      <EntityTypeMapping TypeName="BankModel.View_Admin">
+        <MappingFragment StoreEntitySet="View_Admin">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
           <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
+          <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
+          <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="ConfirmPassword" ColumnName="ConfirmPassword" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="View_Bank">
+      <EntityTypeMapping TypeName="BankModel.View_Bank">
+        <MappingFragment StoreEntitySet="View_Bank">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="SuperAdminId" ColumnName="SuperAdminId" />
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="BankShortName" ColumnName="BankShortName" />
+          <ScalarProperty Name="BankAddress" ColumnName="BankAddress" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="ContactNo1" ColumnName="ContactNo1" />
+          <ScalarProperty Name="ContactNo2" ColumnName="ContactNo2" />
+          <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+          <ScalarProperty Name="BankLogo" ColumnName="BankLogo" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="BankDocument" ColumnName="BankDocument" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Language">
+      <EntityTypeMapping TypeName="BankModel.View_Language">
+        <MappingFragment StoreEntitySet="View_Language">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Product">
+      <EntityTypeMapping TypeName="BankModel.View_Product">
+        <MappingFragment StoreEntitySet="View_Product">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductDetails" ColumnName="ProductDetails" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_SuperAdmin">
+      <EntityTypeMapping TypeName="BankModel.View_SuperAdmin">
+        <MappingFragment StoreEntitySet="View_SuperAdmin">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_getSuperAdminDetail" FunctionName="BankModel.Store.SP_getSuperAdminDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BankModel.SP_getSuperAdminDetail_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="SuperAdminName" ColumnName="SuperAdminName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_LoginCredentials" FunctionName="BankModel.Store.SP_LoginCredentials">
       <ResultMapping>
         <ComplexTypeMapping TypeName="BankModel.SP_LoginCredentials_Result">
@@ -294,5 +382,26 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="View_Branch">
+      <EntityTypeMapping TypeName="BankModel.View_Branch">
+        <MappingFragment StoreEntitySet="View_Branch">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
+          <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="IFSCCode" ColumnName="IFSCCode" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="BankId" ColumnName="BankId" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

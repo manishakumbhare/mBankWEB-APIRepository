@@ -12,21 +12,8 @@ namespace mBankWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bank
+    public partial class View_Bank
     {
-        public Bank()
-        {
-            this.Accounts = new HashSet<Account>();
-            this.Agents = new HashSet<Agent>();
-            this.Products = new HashSet<Product>();
-            this.Branches = new HashSet<Branch>();
-            this.Customers = new HashSet<Customer>();
-            this.Managers = new HashSet<Manager>();
-            this.Transaction_details = new HashSet<Transaction_details>();
-            this.UserDetails = new HashSet<UserDetail>();
-            this.Admins = new HashSet<Admin>();
-        }
-    
         public int ID { get; set; }
         public string BankName { get; set; }
         public Nullable<int> SuperAdminId { get; set; }
@@ -47,18 +34,5 @@ namespace mBankWebAPI.Models
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<bool> Deleted { get; set; }
-    
-        public virtual ICollection<Account> Accounts { get; set; }
-        public virtual Admin Admin { get; set; }
-        public virtual ICollection<Agent> Agents { get; set; }
-        public virtual Language Language { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
-        public virtual SuperAdmin SuperAdmin { get; set; }
-        public virtual ICollection<Branch> Branches { get; set; }
-        public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<Manager> Managers { get; set; }
-        public virtual ICollection<Transaction_details> Transaction_details { get; set; }
-        public virtual ICollection<UserDetail> UserDetails { get; set; }
-        public virtual ICollection<Admin> Admins { get; set; }
     }
 }

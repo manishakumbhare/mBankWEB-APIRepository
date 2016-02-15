@@ -12,14 +12,8 @@ namespace mBankWebAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class View_Admin
     {
-        public Admin()
-        {
-            this.Banks = new HashSet<Bank>();
-            this.Managers = new HashSet<Manager>();
-        }
-    
         public int ID { get; set; }
         public string AdminName { get; set; }
         public Nullable<int> RoleId { get; set; }
@@ -37,10 +31,5 @@ namespace mBankWebAPI.Models
         public Nullable<bool> Deleted { get; set; }
         public Nullable<int> BankId { get; set; }
         public string Username { get; set; }
-    
-        public virtual ICollection<Bank> Banks { get; set; }
-        public virtual ICollection<Manager> Managers { get; set; }
-        public virtual UsersRole UsersRole { get; set; }
-        public virtual Bank Bank { get; set; }
     }
 }
